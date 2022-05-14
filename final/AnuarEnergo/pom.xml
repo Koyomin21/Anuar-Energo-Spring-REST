@@ -79,6 +79,11 @@
             <version>2.10</version>
         </dependency>
 
+        <!--        ActiveMQ       -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
 
         <!--        Lombok       -->
         <dependency>

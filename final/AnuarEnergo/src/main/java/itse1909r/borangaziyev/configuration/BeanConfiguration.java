@@ -3,9 +3,11 @@ package itse1909r.borangaziyev.configuration;
 import itse1909r.borangaziyev.aop.CheckArguments;
 import itse1909r.borangaziyev.aop.ExecutionTimeLogger;
 import itse1909r.borangaziyev.converters.StringToUser;
+import itse1909r.borangaziyev.jms.JmsMessage;
 import itse1909r.borangaziyev.model.*;
 import itse1909r.borangaziyev.repository.UserRepository;
 import itse1909r.borangaziyev.service.ElectricityBillService;
+import itse1909r.borangaziyev.service.JmsService;
 import itse1909r.borangaziyev.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +18,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jms.core.JmsTemplate;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -28,6 +31,7 @@ public class BeanConfiguration {
     private Environment environment;
     private UserService userService;
     private ElectricityBillService billService;
+    private JmsService jmsService;
 
     @Value("${user.username}")
     private String defaultUsername;
@@ -52,6 +56,11 @@ public class BeanConfiguration {
     @Autowired
     public void setBillService(ElectricityBillService billService) {
         this.billService = billService;
+    }
+
+    @Autowired
+    public void setJmsService(JmsService jmsService) {
+        this.jmsService = jmsService;
     }
 
 
@@ -92,10 +101,14 @@ public class BeanConfiguration {
 
 
     @Bean
-    public void testRepo() {
-        System.out.println(billService.getAllBills());
-
+    public void testJms() {
+        JmsMessage jmsMessage = new JmsMessage("Anuar", "Hello to Listeners!");
+        jmsService.sendMessage("mailbox", jmsMessage);
+        jmsService.sendMessage("suggestions", jmsMessage);
+        jmsService.sendMessage("complaints", jmsMessage);
     }
+
+
 
     @Bean
     public void runParallel() {
