@@ -10,13 +10,14 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-//@EnableScheduling
+@EnableScheduling
 public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new StringToUser());
     }
+
 
 
 //    @Bean
