@@ -27,10 +27,6 @@ public class ExecutionTimeLoggerHandler {
 
     @Around("allAnnotatedClassMethods() || allServiceClassMethods()")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        if(signature.getMethod().isAnnotationPresent(Cacheable.class)) {
-            log.info("The following method has been cached: "+ signature.getMethod().getName());
-        }
 
         Object proceed = null;
         long startTime = System.currentTimeMillis();

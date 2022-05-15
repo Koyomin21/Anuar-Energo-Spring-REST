@@ -1,7 +1,10 @@
 package itse1909r.borangaziyev.controller;
 
+import itse1909r.borangaziyev.model.Payment;
+import itse1909r.borangaziyev.model.Provider;
 import itse1909r.borangaziyev.model.Rate;
 import itse1909r.borangaziyev.service.ElectricityBillService;
+import itse1909r.borangaziyev.service.PaymentService;
 import itse1909r.borangaziyev.service.ProviderService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.websocket.server.PathParam;
 import java.io.*;
+import java.util.List;
 
 
 @Controller
@@ -25,13 +29,15 @@ import java.io.*;
 public class ProviderController {
 
     private ProviderService providerService;
+    private PaymentService paymentService;
 
     @Value("${file.path}")
     private String filePath;
 
     @Autowired
-    public ProviderController(ProviderService providerService) {
+    public ProviderController(ProviderService providerService, PaymentService paymentService) {
         this.providerService = providerService;
+        this.paymentService = paymentService;
     }
 
     @PutMapping("/updateRate")
@@ -40,6 +46,15 @@ public class ProviderController {
         return providerService.updateRate(rate) ? "Successfully updated": "Failed to update";
     }
 
+    @GetMapping("/providersPaged/{page:[0-9]*}/{limit:[0-9]+}/{sortByColumn:[A-z]*}")
+    @ResponseBody
+    public List<Provider> getPagedProviders(
+            @PathVariable(name = "page") int page,
+            @PathVariable(name = "limit") int limit,
+            @PathVariable(name = "sortByColumn") String sortByColumn
+    ) {
+        return providerService.getPagedProviders(page, limit, sortByColumn);
+    }
 
     @GetMapping("/downloadFile/{fileName}")
     public ResponseEntity downloadFile(@PathVariable("fileName") String fileName) throws FileNotFoundException {

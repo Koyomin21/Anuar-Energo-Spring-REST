@@ -100,13 +100,13 @@ public class BeanConfiguration {
     }
 
 
-    @Bean
-    public void testJms() {
-        JmsMessage jmsMessage = new JmsMessage("Anuar", "Hello to Listeners!");
-        jmsService.sendMessage("mailbox", jmsMessage);
-        jmsService.sendMessage("suggestions", jmsMessage);
-        jmsService.sendMessage("complaints", jmsMessage);
-    }
+//    @Bean
+//    public void testJms() {
+//        JmsMessage jmsMessage = new JmsMessage("Anuar", "Hello to Listeners!");
+//        jmsService.sendMessage("mailbox", jmsMessage);
+//        jmsService.sendMessage("suggestions", jmsMessage);
+//        jmsService.sendMessage("complaints", jmsMessage);
+//    }
 
 
 
