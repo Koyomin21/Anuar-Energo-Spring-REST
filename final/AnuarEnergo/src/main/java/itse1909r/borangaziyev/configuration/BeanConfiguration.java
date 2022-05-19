@@ -90,7 +90,7 @@ public class BeanConfiguration {
 
 
     @Bean
-    @DependsOn("user")
+    @DependsOn("user") 
     public Building building() {
         Building building = new Building();
         building.setBuildingId(0);

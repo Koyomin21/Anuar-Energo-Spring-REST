@@ -33,7 +33,7 @@ public class ElectricityBillService {
         List<ElectricityBill> bills = billRepository.getAllElectricityBills();
 
         // sorting bills by startPeriod
-        if(bills != null || !bills.isEmpty()) {
+        if(bills != null && !bills.isEmpty()) {
             List<ElectricityBill> sortedList = bills.stream()
                     .sorted(Comparator.comparing(ElectricityBill::getStartPeriod))
                     .collect(Collectors.toList());
@@ -47,7 +47,7 @@ public class ElectricityBillService {
     public List<ElectricityBill> getBillsOfUser(int userId) {
         List<ElectricityBill> bills = billRepository.getAllElectricityBills();
 
-        if(bills != null || !bills.isEmpty()) {
+        if(bills != null && !bills.isEmpty()) {
 
             return bills.stream()
                     .filter(bill -> bill.getUserId() == userId)

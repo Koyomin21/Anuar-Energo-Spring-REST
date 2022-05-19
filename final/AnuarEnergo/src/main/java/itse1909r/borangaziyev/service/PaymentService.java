@@ -24,7 +24,7 @@ public class PaymentService {
     @Scheduled(fixedRateString = "${fixedRate.in.milliseconds}")
     public void checkForNewPayments() {
         List<Payment> paymentList = paymentRepository.getAllPayments();
-        if(paymentList != null && paymentList.isEmpty()) {
+        if(paymentList == null || paymentList.isEmpty()) {
             System.out.println("No payments have been made!");
         } else {
             System.out.println("Payments: " + paymentList);

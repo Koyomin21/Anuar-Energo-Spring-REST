@@ -1,7 +1,12 @@
 package itse1909r.borangaziyev.model;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.AssertTrue;
 
+@Component
+@Data
 public class ElectricityBillDetails {
     private int detailsId;
     private int electroBillId;

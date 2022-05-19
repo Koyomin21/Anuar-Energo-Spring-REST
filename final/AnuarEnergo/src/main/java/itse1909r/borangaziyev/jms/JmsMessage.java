@@ -13,5 +13,4 @@ public class JmsMessage {
         this.message = message;
     }
 
-    public JmsMessage(){}
 }

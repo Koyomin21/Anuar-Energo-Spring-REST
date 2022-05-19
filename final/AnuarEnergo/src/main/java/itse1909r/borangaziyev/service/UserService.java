@@ -27,7 +27,7 @@ public class UserService {
 
     public boolean batchInsertUsers(List<User> users) {
         int []inserted = userRepository.batchInsert(users);
-        if(inserted.length != 0 || Arrays.stream(inserted).allMatch(row -> row != 0)) return true;
+        if(inserted.length != 0 && Arrays.stream(inserted).allMatch(row -> row != 0)) return true;
 
         return false;
     }
@@ -64,7 +64,7 @@ public class UserService {
 
         int []results = userRepository.batchDeleteUserRolesByUser(userId, roleIds);
 
-        if(results.length != 0 || Arrays.stream(results).allMatch(row -> row!=0)) return true;
+        if(results.length != 0 && Arrays.stream(results).allMatch(row -> row!=0)) return true;
 
         return false;
     }
